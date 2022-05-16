@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+	
+	<bean id="logAop" class="com.gyojincompany.spring_9_2.LogAop"></bean>
+	
+	<aop:config>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.gyojincompany.spring_9_2.*)" id="publicM"/>
+			<aop:around method="loggerAop" pointcut-ref="publicM"/>		
+		</aop:aspect>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.gyojincompany.spring_9_2.*)" id="publicM"/>
+			<aop:before method="beforeAdvice" pointcut-ref="publicM"/>		
+		</aop:aspect>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.gyojincompany.spring_9_2.*)" id="publicM"/>
+			<aop:after-returning method="afterReturningAdvice" pointcut-ref="publicM"/>		
+		</aop:aspect>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.gyojincompany.spring_9_2.*)" id="publicM"/>
+			<aop:after-throwing method="afterThrowingAdvice" pointcut-ref="publicM"/>		
+		</aop:aspect>
+		<aop:aspect id="logger" ref="logAop">
+			<aop:pointcut expression="within(com.gyojincompany.spring_9_2.*)" id="publicM"/>
+			<aop:after method="afterAdvice" pointcut-ref="publicM"/>		
+		</aop:aspect>	
+	</aop:config>
+	
+	<bean id="stu1" class="com.gyojincompany.spring_9_2.Student">
+		<property name="name">
+			<value>홍길동</value>
+		</property>
+		<property name="age">
+			<value>30살</value>
+		</property>
+		<property name="gradeNum">
+			<value>3학년</value>
+		</property>
+		<property name="classNum">
+			<value>7반</value>
+		</property>	
+	</bean>
+	
+	<bean id="worker1" class="com.gyojincompany.spring_9_2.Worker">
+		<property name="name">
+			<value>이순신</value>
+		</property>	
+		<property name="age">
+			<value>40살</value>
+		</property>
+		<property name="job">
+			<value>장군</value>
+		</property>
+	
+	</bean>
+	
+
+</beans>
